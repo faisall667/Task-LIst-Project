@@ -14,4 +14,31 @@ function saveSetting (){
     heading.style.backgroundColor=colorOutput
 }
 
+function resetSetting (){
+    document.getElementById('settingsForm').reset();
+
+    heading.innerHTML = "Task List"
+    heading.style.backgroundColor="white"
+
+}
+
+let taskListArray = []
+
+function addTask(){
+    let taskName = document.getElementById("taskDescription").value
+    let date = document.getElementById('date').value
+
+    const taskObject = {
+        taskTitle:taskName,
+        taskDate:date,
+        taskStatus:"New"
+    } 
+
+    taskListArray.push(taskObject)
+    
+    document.getElementById('addTaskForm').reset();
+
+}
+
+
 
