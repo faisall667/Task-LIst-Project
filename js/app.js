@@ -33,12 +33,35 @@ function addTask(){
         taskDate:date,
         taskStatus:"New"
     } 
-
+    
     taskListArray.push(taskObject)
     
     document.getElementById('addTaskForm').reset();
 
+
 }
+
+function enterTask(){
+
+    `<div class="card" style="width: 30rem;">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                          <input class="form-check-input me-1" type="checkbox" value="" id="firstCheckbox">
+                          <label class="form-check-label" for="firstCheckbox"></label>
+                        </li>
+                      </ul>
+                    <div class="card-body">
+                      <h5 class="card-title">${taskListArray[0]}</h5>
+                      <p class="card-text">${taskListArray[1]}</p>
+                      <a href="#" class="btn btn-danger">Done/Delete</a>
+                    </div>
+                  </div>`
+               
+
+                
+}
+
+
 
 
 
