@@ -38,11 +38,11 @@ function addTask(){
     
     document.getElementById('addTaskForm').reset();
 
-
+    renderTaskList();
 }
 
-function enterTask(){
-
+function enterTask(taskTitle, taskDate, taskStatus){
+    const display =
     `<div class="card" style="width: 30rem;">
                     <ul class="list-group">
                         <li class="list-group-item">
@@ -51,17 +51,28 @@ function enterTask(){
                         </li>
                       </ul>
                     <div class="card-body">
-                      <h5 class="card-title">${taskListArray[0]}</h5>
-                      <p class="card-text">${taskListArray[1]}</p>
-                      <a href="#" class="btn btn-danger">Done/Delete</a>
+                      <h5 class="card-title">${taskTitle}</h5>
+                      <p class="card-text">${taskDate}</p>
+                      <a href="#" class="btn btn-danger">Delete</a>
                     </div>
-                  </div>`
+                  </div>`;
                
-
+    return display;
                 
 }
 
 
+function renderTaskList(){
+    let taskList = document.getElementById('myTaskList');
+    taskList.innerHTML = "";
+    for (taskIndex =0; taskIndex < taskListArray.length; taskIndex++){
+        taskList.innerHTML = taskList.innerHTML + 
+            enterTask(taskListArray[taskIndex].taskTitle,
+                    taskListArray[taskIndex].taskDate,
+                     taskListArray[taskIndex].taskStatus)
+                     
+            }             
+        }
 
-
-
+       
+         
