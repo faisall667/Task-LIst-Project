@@ -21,7 +21,9 @@ function resetSetting (){
 
     heading.innerHTML = "Task List"
     heading.style.backgroundColor="white"
-    taskList.innerHTML = ""
+    taskListArray = []
+
+    renderTaskList()
 
 }
 
@@ -48,22 +50,45 @@ function addTask(){
 }
 
 function enterTask(taskTitle, taskDate, taskStatus, taskId){
-    const display =
+    if (taskStatus == "New") {
+    const display = 
     `<div class="card" style="width: 30rem;">
-                    <ul class="list-group">
-                        <li class="list-group-item">
-                          <input class="form-check-input me-1" type="checkbox" value="checkbox" id="checkbox ${taskId}">
-                          <label class="form-check-label" for="firstCheckbox"></label>
-                        </li>
-                      </ul>
+                    
                     <div class="card-body" id="${taskId}">
+                    
+                        
+                          <input class="form-check-input me-1" type="checkbox" value="checkbox">
+                          <label class="form-check-label" for="firstCheckbox"></label>
+                        
+                    
                       <h5 class="card-title">${taskTitle}</h5>
                       <p class="card-text">${taskDate}</p>
-                      <a href="#" class="btn btn-danger" id="deleteButton ${taskId}">Delete</a>
+                      <a href="#" class="btn btn-danger">Delete</a>
                     </div>
                   </div>`;
-               
-    return display;
+
+        return display;
+    }
+    else {
+        const display =
+        `<div class="card" style="width: 30rem;">
+                        
+                        <div class="card-body" id="${taskId}">
+                        
+                            
+                              <input class="form-check-input me-1" type="checkbox" value="checkbox" disabled checked>
+                              <label class="form-check-label" for="firstCheckbox"></label>
+                            
+                        
+                          <h5 class="card-title">${taskTitle}</h5>
+                          <p class="card-text">${taskDate}</p>
+                          <label>Done</label>
+                        </div>
+                      </div>`;
+        return display;
+    }  
+
+    
                 
 }
 
@@ -87,6 +112,7 @@ function renderTaskList(){
             //console.log(clickedEvent);
             const parentNode = clickedEvent.parentNode;
             let taskIdlocal = +parentNode.id;
+    
             //console.log("my task title is " + taskTitle)
             //const taskTitle = parseInt(parentNode.id);
             if (clickedEvent.innerHTML === "Delete") {
@@ -94,37 +120,48 @@ function renderTaskList(){
                 if (taskListArray.length !== 0) {
                      //const indexToDelete = studentID - 1;
             // find the student id
-            let indexToDelete = 0;
+            let indexToDelete = -1;
             for (taskIndex =0; taskIndex < taskListArray.length; taskIndex++) {
                 if (taskListArray[taskIndex].taskId === taskIdlocal) {
                     indexToDelete = taskIndex;
                     break;
                 }
             }
-            console.log("indexToDelete is" + indexToDelete)
+            //console.log("indexToDelete is" + indexToDelete)
             taskListArray.splice(indexToDelete,1)
             
             renderTaskList()
         }
 
     }else if (clickedEvent.value === 'checkbox') {
+        let indexToCheckbox = -1;
+        for (taskIndex =0; taskIndex < taskListArray.length; taskIndex++) {
+            if (taskListArray[taskIndex].taskId === taskIdlocal) {
+                indexToCheckbox = taskIndex;
+                break;
+            }
+        }
+        //console.log("indexToDelete is" + indexToDelete)
+       taskListArray[indexToCheckbox].taskStatus = "Done"
+        
+        renderTaskList()
         //console.log("I clicked " + clickedEvent.id)
         //console.log("Delete Button #" + clickedEvent.id === "deleteButton")
-        let myCheckbox = clickedEvent.id
+       // let myCheckbox = clickedEvent.id
 
         //console.log(myCheckbox)
-        myArray= myCheckbox.split(" ")
-        numericArray= +myArray[1]
+       // myArray= myCheckbox.split(" ")
+       // numericArray= +myArray[1]
         //console.log(typeof numericArray)
         //console.log(myArray[1])
         //console.log(typeof (myArray[1]))
-        let checkBox = document.getElementById(myCheckbox)
-        let Delete = document.getElementById("deleteButton" + ' ' + numericArray)
+       // let checkBox = document.getElementById(myCheckbox)
+       // let Delete = document.getElementById("deleteButton" + ' ' + numericArray)
        
         
         
-        checkBox.disabled=true
-        Delete.remove()
+      //  checkBox.disabled=true
+      //  Delete.remove()
 
         
   
